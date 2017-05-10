@@ -1,0 +1,4 @@
+clear
+make -C ../Libft/
+gcc -Wall -Wextra -Werror -o ft_select *.c ../Libft/libft.a -ltermcap
+./ft_select $*
