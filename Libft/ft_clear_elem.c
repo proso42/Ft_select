@@ -26,8 +26,11 @@ void	ft_clear_elem(t_list **begin_list, t_list *elem)
 				current = current->next;
 			current->next = elem->next;
 		}
+		else
+			*begin_list = elem->next;
 		ft_strdel((char**)&elem->data);
 		elem->size = 0;
 		elem->next = NULL;
+		free(elem);
 	}
 }

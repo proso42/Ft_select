@@ -6,7 +6,7 @@
 /*   By: proso <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 08:27:04 by proso             #+#    #+#             */
-/*   Updated: 2017/05/09 14:28:03 by proso            ###   ########.fr       */
+/*   Updated: 2017/05/15 11:56:10 by proso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define C_MAGENTA 5
 # define C_CYAN 6
 # define C_WHITE 7
+# define ABS(Value) (((Value) < 0) ? (-(Value)) : (Value))
 
 typedef	struct		s_list
 {
@@ -74,6 +75,7 @@ int					ft_list_size(t_list *begin_list);
 char				**ft_list_to_tab(t_list *begin_list, char *first);
 char				*ft_get_elem(t_list *begin_list, int i);
 t_list				*ft_get_p_elem(t_list *begin_list, int i);
+t_list              **ft_get_addr_elem(t_list **begin_list, int i);
 int					get_width_win(void);
 void				*ft_memalloc(size_t size);
 void				*ft_memccpy(void *dst, void const *src, int c, size_t n);

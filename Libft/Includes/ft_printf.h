@@ -6,7 +6,7 @@
 /*   By: proso <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 16:34:12 by proso             #+#    #+#             */
-/*   Updated: 2017/04/05 20:22:16 by proso            ###   ########.fr       */
+/*   Updated: 2017/05/16 15:51:27 by proso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct	s_print
 int				identify_percent(t_print *p, int i);
 int				check_conversion(char c);
 int				ft_printf(const char *format, ...);
-int				show_buff(t_print *p);
+int				ft_dprintf(int fd, const char *format, ...);
 int				apply_style(char *str, t_print *p, int i);
 int				check_brackets(char *str);
 char			*convert_uni(int code);

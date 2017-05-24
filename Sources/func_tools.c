@@ -12,10 +12,21 @@
 
 #include "../Includes/ft_select.h"
 
+void	del_underline(t_select *info, int num)
+{
+	t_list	*current;
+
+	current = ft_get_p_elem(info->data_list, num);
+	CURSE_MOVE(info->curs_x, info->curs_y);
+	if (current->slc)
+		ft_dprintf(0, "{GREEN}{black}%-*s", info->stock->size_max, current->data);
+	else
+		ft_dprintf(0, "{res}%-*s", info->stock->size_max, current->data);
+}
+
 int		test_go_up_rigth(t_select *info)
 {
 	int		save;
-	t_list	*current;
 
 	if (info->num_elem == 0)
 		return (-1);
@@ -29,9 +40,7 @@ int		test_go_up_rigth(t_select *info)
 			info->num_elem = save;
 			return (-1);
 		}
-		current = ft_get_p_elem(info->data_list, save);
-		CURSE_MOVE(info->curs_x, info->curs_y);
-		ft_printf("%-*s", info->stock->size_max, current->data);
+		del_underline(info, save);
 		info->col = (info->stock->line_size / info->stock->size_max) - 1;
 		info->curs_x = (info->stock->size_max + 1) * info->col;
 		info->curs_y--;
@@ -43,7 +52,6 @@ int		test_go_up_rigth(t_select *info)
 int		test_go_down_left(t_select *info)
 {
 	int		save;
-	t_list	*current;
 
 	if (info->col == (info->stock->line_size / info->stock->size_max) - 1)
 	{
@@ -55,9 +63,7 @@ int		test_go_down_left(t_select *info)
 			info->num_elem = save;
 			return (-1);
 		}
-		current = ft_get_p_elem(info->data_list, save);
-		CURSE_MOVE(info->curs_x, info->curs_y);
-		ft_printf("%-*s", info->stock->size_max, current->data);
+		del_underline(info, save);
 		info->col = 0;
 		info->curs_x = 0;
 		info->curs_y++;

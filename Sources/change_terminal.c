@@ -14,8 +14,9 @@
 
 int		default_terminal(t_select *info)
 {
-	tputs(tgetstr("ve", NULL), 1, ft_out);
-	//tputs(tgetstr("te", NULL), 1, ft_out);
+	tputs(tgetstr("te", NULL), 0, ft_out);
+	print_arg_slc(info);
+	tputs(tgetstr("ve", NULL), 0, ft_out);
 	if ((tcsetattr(0, TCSADRAIN, &info->d_term)) == -1)
 		return (0);
 	return (1);

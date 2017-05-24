@@ -46,7 +46,6 @@ typedef struct	s_print
 int				identify_percent(t_print *p, int i);
 int				check_conversion(char c);
 int				ft_printf(const char *format, ...);
-int				show_buff(t_print *p);
 int				apply_style(char *str, t_print *p, int i);
 int				check_brackets(char *str);
 char			*convert_uni(int code);

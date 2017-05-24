@@ -6,7 +6,7 @@
 #    By: proso <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/25 14:56:04 by proso             #+#    #+#              #
-#    Updated: 2017/05/09 14:25:35 by proso            ###   ########.fr        #
+#    Updated: 2017/05/16 15:46:59 by proso            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = libft.a
@@ -45,6 +45,7 @@ SRC = ft_atoi.c \
 	  ft_list_size.c \
 	  ft_list_to_tab.c \
 	  ft_get_p_elem.c \
+	  ft_get_addr_elem.c \
 	  ft_get_elem.c \
 	  ft_get_width_win.c \
 	  ft_memalloc.c \
@@ -107,6 +108,7 @@ SRC = ft_atoi.c \
 	  ft_toupper.c \
 	  get_next_line.c \
 	  ft_printf.c \
+	  ft_dprintf.c \
 	  Libprintf/add_attribute.c \
 	  Libprintf/add_prefixe.c \
 	  Libprintf/add_prefixe_s.c \

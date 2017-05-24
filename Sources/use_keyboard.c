@@ -21,8 +21,9 @@ int		use_keyboard(t_select *info)
 		return (0);
 	else if (info->buf[0] == 32 && !info->buf[1])
 		return (space(info));
-/*	else
-	{
+	else if ((info->buf[0] == 127 || info->buf[0] == 126) && !info->buf[1])
+		return (delete(info));
+/*	{
 		ft_printf("%d | %d | %d\n", info->buf[0], info->buf[1], info->buf[2]);
 		return (1);
 	}*/

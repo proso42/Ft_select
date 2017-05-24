@@ -15,9 +15,10 @@
 
 # include <termios.h>
 # include <term.h>
+#include <stdio.h>
 # include "libft.h"
 
-# define CURSE_MOVE(x, y) tputs(tgoto(tgetstr("cm", NULL), x, y), 1, ft_out)
+# define CURSE_MOVE(x, y) tputs(tgoto(tgetstr("cm", NULL), x, y), 0, ft_out)
 
 typedef struct			s_stock
 {
@@ -37,7 +38,6 @@ typedef struct			s_select
 		int				curs_x;
 		int				curs_y;
 		int				nb_elem;
-		int				inc;
 		int				col;
 		int				num_elem;
 }						t_select;
@@ -55,5 +55,12 @@ void	reset_end(t_select *info);
 int		test_go_up_rigth(t_select *info);
 int		test_go_down_left(t_select *info);
 int		space(t_select *info);
+void	del_underline(t_select *info, int num);
+void	next(t_select *info);
+void	unselect_all(t_select *info);
+void	unselect_some(t_select *info);
+int		delete(t_select *info);
+void	print_arg_slc(t_select *info);
+void	show_nb_elem_slc(t_select *info);
 
 #endif
