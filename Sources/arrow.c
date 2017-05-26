@@ -12,16 +12,18 @@
 
 #include "../Includes/ft_select.h"
 
-int		left_arrow(t_select *info)
+static int		left_arrow(t_select *info)
 {
 	int		rep;
 
+	if (!info->num_elem)
+		return (1);
 	if (!(rep = test_go_up_rigth(info)))
 	{
 		del_underline(info, info->num_elem);
 		info->col--;
-		info->num_elem -= info->stock->elem_per_col;
-		info->curs_x = (info->stock->size_max + 1) * info->col;
+		info->num_elem -= info->stock.nb_line;
+		info->curs_x = (info->stock.size_max + 1) * info->col;
 	}
 	else if (rep < 0)
 		return (1);
@@ -29,20 +31,20 @@ int		left_arrow(t_select *info)
 	return (1);
 }
 
-int		rigth_arrow(t_select *info)
+static int		rigth_arrow(t_select *info)
 {
 	int		rep;
 
-	if (info->stock->elem_per_col == 1 && info->num_elem == info->nb_elem - 1)
+	if (info->nb_elem == 1 && !info->num_elem)
 		return (1);
 	if (!(rep = test_go_down_left(info)))
 	{
-		if (info->num_elem + info->stock->elem_per_col >= info->nb_elem)
+		if (info->num_elem + info->stock.nb_line >= info->nb_elem)
 			return (1);
 		del_underline(info, info->num_elem);
 		info->col++;
-		info->num_elem += info->stock->elem_per_col;
-		info->curs_x = (info->stock->size_max + 1) * info->col;
+		info->num_elem += info->stock.nb_line;
+		info->curs_x = (info->stock.size_max + 1) * info->col;
 	}
 	else if (rep < 0)
 		return (1);
@@ -50,49 +52,41 @@ int		rigth_arrow(t_select *info)
 	return (1);
 }
 
-int		up_arrow(t_select *info)
+static int		up_arrow(t_select *info)
 {
-	int		x;
-
-	x = info->curs_x;
 	del_underline(info, info->num_elem);
-	info->curs_x = x;
 	info->curs_y--;
 	info->num_elem--;
 	if (info->num_elem < 0)
 		reset_end(info);
 	if (info->curs_y < 0)
 	{
-		info->curs_y = info->stock->elem_per_col - 1;
+		info->curs_y = info->stock.nb_line - 1;
 		info->col--;
-		info->curs_x = (info->stock->size_max + 1) * info->col;
+		info->curs_x = (info->stock.size_max + 1) * info->col;
 	}
 	next(info);
 	return (1);
 }
 
-int		down_arrow(t_select *info)
+static int		down_arrow(t_select *info)
 {
-	int		x;
-
-	x = info->curs_x;
 	del_underline(info, info->num_elem);
-	info->curs_x = x;
 	info->curs_y++;
 	info->num_elem++;
 	if (info->num_elem >= info->nb_elem)
 		reset_start(info);
-	if (info->curs_y >= info->stock->elem_per_col)
+	if (info->curs_y >= info->stock.nb_line)
 	{
 		info->curs_y = 0;
 		info->col++;
-		info->curs_x = (info->stock->size_max + 1) * info->col;
+		info->curs_x = (info->stock.size_max + 1) * info->col;
 	}
 	next(info);
 	return (1);
 }
 
-int		arrow(t_select *info)
+int				arrow(t_select *info)
 {
 	if (info->buf[0] == 27 && info->buf[2] == 65 && info->nb_elem > 1)
 		return (up_arrow(info));

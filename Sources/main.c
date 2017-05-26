@@ -12,13 +12,40 @@
 
 #include "../Includes/ft_select.h"
 
-int		ft_out(int c)
+int			ft_out(int c)
 {
-	write(1, &c, 1);
+	write(0, &c, 1);
 	return (1);
 }
 
-int		main(int argc, char **argv)
+static void	loop(t_select *info)
+{
+	int		ret;
+
+	while (1)
+	{
+		if (!(ret = use_keyboard(info)))
+		{
+			default_terminal(info, 1);
+			exit(0);
+		}
+		else if (ret < 0)
+		{
+			default_terminal(info, 0);
+			exit(0);
+		}
+//ft_printf("%d | %d | %d\n", *info->buf, *(info->buf + 1), *(info->buf + 2));
+		ft_memset(info->buf, 0, 3);
+		if (!info->small_screen)
+		{
+			show_nb_elem_slc(info);
+			show_search_mode(info);
+		}
+	}
+	default_terminal(info, 0);
+}
+
+int			main(int argc, char **argv)
 {
 	t_select	info;
 
@@ -26,34 +53,23 @@ int		main(int argc, char **argv)
 		return (0);
 	if (!(init_terminal(&info)))
 	{
-		ft_dprintf(0, "{red}{bold}Missing some environment variable !{res}\n");
+		ft_dprintf(1, "{red}{bold}Missing some environment variable !{res}\n");
 		return (-1);
 	}
 	if (!(info.data_list = ft_tab_to_list(&argv[1])))
 		return (-1);
-	tputs(tgetstr("ti", NULL), 0, ft_out);
-	tputs(tgetstr("vi", NULL), 0, ft_out);
-	tputs(tgetstr("cl", NULL), 0, ft_out);
 	info.nb_elem = ft_list_size(info.data_list);
+	info.num_elem = 0;
+	get_info(&info);
+	init_signal();
 	unselect_all(&info);
-	print_list_col(&info);
-	CURSE_MOVE(0, 0);
-	info.curs_x = 0;
-	info.curs_y = 0;
-	ft_dprintf(0, "{underline}{bold}%s{res}%-*c", info.data_list->data,
-							info.stock->size_max - info.data_list->size, ' ');
-	show_nb_elem_slc(&info);
-	while (1)
+	if (print_list_col(&info))
 	{
-//		ft_printf("%d | %d | %d\n", *info.buf, *(info.buf + 1), *(info.buf + 2));
-		if (!(use_keyboard(&info)))
-		{
-			default_terminal(&info);
-			return (0);
-		}
-		ft_memset(info.buf, 0, 3);
+		ft_dprintf(isatty(1), "{underline}{bold}{cyan}%s{res}%-*c",
+		info.data_list->data, info.stock.size_max - info.data_list->size, ' ');
 		show_nb_elem_slc(&info);
+		show_search_mode(&info);
 	}
-	default_terminal(&info);
+	loop(&info);
 	return (0);
 }

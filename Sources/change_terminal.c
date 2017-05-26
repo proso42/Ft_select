@@ -12,11 +12,12 @@
 
 #include "../Includes/ft_select.h"
 
-int		default_terminal(t_select *info)
+int		default_terminal(t_select *info, int mode)
 {
 	tputs(tgetstr("te", NULL), 0, ft_out);
-	print_arg_slc(info);
 	tputs(tgetstr("ve", NULL), 0, ft_out);
+	if (mode)
+		print_arg_slc(info);
 	if ((tcsetattr(0, TCSADRAIN, &info->d_term)) == -1)
 		return (0);
 	return (1);
@@ -38,7 +39,13 @@ int		init_terminal(t_select *info)
 	info->term.c_cc[VTIME] = 0;
 	info->curs_y = 0;
 	info->curs_x = 0;
+	info->all = 0;
 	if ((tcsetattr(0, TCSADRAIN, &info->term)) == -1)
 		return (0);
+	tputs(tgetstr("ti", NULL), 0, ft_out);
+	tputs(tgetstr("vi", NULL), 0, ft_out);
+	tputs(tgetstr("cl", NULL), 0, ft_out);
+	ft_bzero(info->buf_search, 100);
+	ft_bzero(info->buf, 3);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: proso <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 16:34:12 by proso             #+#    #+#             */
-/*   Updated: 2017/04/05 20:22:16 by proso            ###   ########.fr       */
+/*   Updated: 2017/05/24 17:18:02 by proso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct	s_print
 	char		*format;
 	va_list		ap;
 	int			ret;
+	int			fd;
 }				t_print;
 
 int				identify_percent(t_print *p, int i);

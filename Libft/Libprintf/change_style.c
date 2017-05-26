@@ -6,7 +6,7 @@
 /*   By: proso <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 22:07:48 by proso             #+#    #+#             */
-/*   Updated: 2017/04/07 11:58:02 by proso            ###   ########.fr       */
+/*   Updated: 2017/05/24 17:16:11 by proso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		apply_style(char *str, t_print *p, int i)
 
 	if (!(code = check_code(str)))
 	{
-		write(1, "\x1b", 1);
+		write(p->fd, "\x1b", 1);
 		return (i);
 	}
 	sub = ft_strsub(str, 0, 5);

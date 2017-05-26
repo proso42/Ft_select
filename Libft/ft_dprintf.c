@@ -6,7 +6,7 @@
 /*   By: proso <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 14:51:21 by proso             #+#    #+#             */
-/*   Updated: 2017/05/16 15:51:03 by proso            ###   ########.fr       */
+/*   Updated: 2017/05/24 17:17:18 by proso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int		ft_dprintf(int fd, const char *format, ...)
 	p.ret = 0;
 	p.format = ft_strdup(format);
 	p.buff = ft_strnew(0);
+	p.fd = fd;
 	va_start(p.ap, format);
 	while (p.format[i])
 	{

@@ -21,7 +21,7 @@ void	print_arg_slc(t_select *info)
 	{
 		if (current->slc)
 		{
-			ft_dprintf(0, " %s", current->data);
+			ft_dprintf(1, " %s", current->data);
 		}
 		current = current->next;
 	}
