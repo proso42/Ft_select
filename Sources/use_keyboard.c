@@ -46,5 +46,7 @@ int			use_keyboard(t_select *info)
 		return (clear_buf_search(info));
 	else if (info->buf[0] == 9 && !info->buf[1])
 		return (search_in_list(info));
+	else if (info->buf[0] == 43 && !info->buf[1])
+		return (restore_elem(info));
 	return (1);
 }

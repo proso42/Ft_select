@@ -1,47 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   space.c                                            :+:      :+:    :+:   */
+/*   restore_elem.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proso <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/10 15:16:08 by proso             #+#    #+#             */
-/*   Updated: 2017/05/10 15:16:09 by proso            ###   ########.fr       */
+/*   Created: 2017/05/26 17:21:44 by proso             #+#    #+#             */
+/*   Updated: 2017/05/26 17:21:47 by proso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/ft_select.h"
 
-int		space(t_select *info)
-{
-	t_list	*current;
-
-	current = ft_get_p_elem(info->data_list, info->num_elem);
-	current->slc = (current->slc) ? 0 : 1;
-	CURSE_MOVE(info->curs_x, info->curs_y);
-	if (current->slc)
-		ft_dprintf(isatty(1), "{GREEN}{black}{underline}%s{GREEN}{res}%-*c",
-				current->data, info->stock.size_max - current->size - 1, ' ');
-	else
-		ft_dprintf(isatty(1), "{res}{underline}{magenta}{bold}%s{res}%-*c",
-				current->data, info->stock.size_max - current->size - 1, ' ');
-	info->buf[0] = 27;
-	info->buf[1] = 91;
-	info->buf[2] = 66;
-	return (arrow(info));
-}
-
-int		delete(t_select *info)
+int		restore_elem(t_select *info)
 {
 	int		i;
 	int		num;
 
-	num = info->num_elem;
-	ft_push_back(&info->delete_list, ft_get_p_elem(info->data_list, num)->data);
-	ft_clear_elem(&info->data_list, ft_get_p_elem(info->data_list, num));
-	if (!info->data_list)
-		return (0);
+	if (!info->delete_list)
+		return (1);
+	ft_push_back(&info->data_list, ft_list_last(info->delete_list)->data);
+	ft_clear_elem(&info->delete_list, ft_list_last(info->delete_list));
+	ft_list_last(info->data_list)->slc = 0;
 	i = info->stock.nb_line + 2;
+	num = info->num_elem;
 	while (i >= 0)
 	{
 		CURSE_MOVE(0, i);

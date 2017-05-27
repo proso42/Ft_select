@@ -14,9 +14,10 @@
 
 void	show_search_mode(t_select *info)
 {
-	CURSE_MOVE(25, info->stock.nb_line + 1);
+	CURSE_MOVE(25, info->stock.y_max + 1);
 	ft_dprintf(isatty(1), "{yellow}{bold}{underline}search :{res}  ");
-	ft_dprintf(isatty(1), "{italic}%s{res}", info->buf_search);
+	ft_dprintf(isatty(1), "{italic}%.*s{res}", info->stock.nb_ch - 35,
+															info->buf_search);
 	CURSE_MOVE(info->curs_x, info->curs_y);
 }
 
@@ -25,9 +26,9 @@ int		write_buf_search(t_select *info)
 	int		i;
 
 	i = 0;
-	while (info->buf_search[i] && i < info->stock.size_max + 34)
+	while (info->buf_search[i])
 		i++;
-	if (i == info->stock.size_max + 34)
+	if (i >= info->stock.nb_ch - 35)
 		return (1);
 	info->buf_search[i] = info->buf[0];
 	return (1);

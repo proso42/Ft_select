@@ -14,12 +14,12 @@
 
 int		default_terminal(t_select *info, int mode)
 {
+	if ((tcsetattr(0, TCSADRAIN, &info->d_term)) == -1)
+		return (0);
 	tputs(tgetstr("te", NULL), 0, ft_out);
 	tputs(tgetstr("ve", NULL), 0, ft_out);
 	if (mode)
 		print_arg_slc(info);
-	if ((tcsetattr(0, TCSADRAIN, &info->d_term)) == -1)
-		return (0);
 	return (1);
 }
 

@@ -37,6 +37,7 @@ typedef struct			s_select
 		char			*name_term;
 		char			buf[3];
 		t_list			*data_list;
+		t_list			*delete_list;
 		int				curs_x;
 		int				curs_y;
 		int				nb_elem;
@@ -45,6 +46,8 @@ typedef struct			s_select
 		int				all;
 		char			buf_search[100];
 		int				small_screen;
+		int				nb_page;
+		int				page;
 }						t_select;
 
 int			init_terminal(t_select *info);
@@ -75,5 +78,6 @@ int			clear_buf_search(t_select *info);
 int			search_in_list(t_select *info);
 int			get_num_elem(t_select *info, t_list *elem);
 void		del_screen(t_select *info);
+int			restore_elem(t_select *info);
 
 #endif

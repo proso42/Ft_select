@@ -6,7 +6,7 @@
 #    By: proso <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/25 14:56:04 by proso             #+#    #+#              #
-#    Updated: 2017/05/16 15:46:59 by proso            ###   ########.fr        #
+#    Updated: 2017/05/26 17:32:58 by proso            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = libft.a
@@ -34,6 +34,7 @@ SRC = ft_atoi.c \
 	  ft_clear_elem.c \
 	  ft_lstiter.c \
 	  ft_lstmap.c \
+	  ft_list_last.c \
 	  ft_push_back.c \
 	  ft_push_front.c \
 	  ft_remove_list.c \
