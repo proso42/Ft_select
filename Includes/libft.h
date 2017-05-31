@@ -61,7 +61,7 @@ char				*ft_lutoa(unsigned long value, unsigned long base);
 void				ft_fill_str(int nb_char, int n, char *str);
 void				ft_clear_elem(t_list **begin_list, t_list *elem);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
-t_list              *ft_list_last(t_list *begin_list);
+t_list				*ft_list_last(t_list *begin_list);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int					ft_push_back(t_list **begin_list, void *str);
 t_list				*ft_push_front(t_list **begin_list, char *str);

@@ -6,7 +6,7 @@
 #    By: proso <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/25 14:56:04 by proso             #+#    #+#              #
-#    Updated: 2017/05/26 17:32:58 by proso            ###   ########.fr        #
+#    Updated: 2017/05/27 14:43:48 by proso            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = libft.a
@@ -137,12 +137,11 @@ all: $(NAME)
 
 %.o:%.c
 	@$(CC) $(FLAGS) -I./$(INCLUDE) -o $@ -c $<
-	@echo "$< \x1b[32m\x1b[1m✓\x1b[0m"
-	@./p_bar
+	@./p_bar $<
 	@sleep 0.05
-	@clear
 
 $(NAME): $(OBJ)
+	@sleep 1
 	@ar rcs $(NAME) $(OBJ)
 	@echo "\x1b[32m\x1b[1mLibrary created ✓✓✓\x1b[0m"
 

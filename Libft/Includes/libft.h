@@ -76,7 +76,7 @@ int					ft_list_size(t_list *begin_list);
 char				**ft_list_to_tab(t_list *begin_list, char *first);
 char				*ft_get_elem(t_list *begin_list, int i);
 t_list				*ft_get_p_elem(t_list *begin_list, int i);
-t_list              **ft_get_addr_elem(t_list **begin_list, int i);
+t_list				**ft_get_addr_elem(t_list **begin_list, int i);
 int					get_width_win(void);
 void				*ft_memalloc(size_t size);
 void				*ft_memccpy(void *dst, void const *src, int c, size_t n);

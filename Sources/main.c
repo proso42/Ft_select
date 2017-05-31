@@ -35,7 +35,6 @@ static void	loop(t_select *info)
 			default_terminal(info, 0);
 			exit(0);
 		}
-//	ft_printf("%d | %d | %d\n", *info->buf, *(info->buf + 1), *(info->buf + 2));
 		ft_memset(info->buf, 0, 3);
 		if (!info->small_screen)
 		{

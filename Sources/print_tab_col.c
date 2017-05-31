@@ -20,9 +20,9 @@ static void	print_col(t_select *info)
 	info->curs_y = 0;
 	info->curs_x = info->col * (info->stock.size_max + 1);
 	info->stock.nb_col++;
-	CURSE_MOVE(info->curs_x, info->curs_y);
 	while (info->curs_y < info->stock.nb_line && current)
 	{
+		CURSE_MOVE(info->curs_x, info->curs_y);
 		if (current->slc)
 			ft_dprintf(isatty(1), "{GREEN}{black}");
 		else
@@ -30,7 +30,6 @@ static void	print_col(t_select *info)
 		ft_dprintf(isatty(1), "%-*s{res}", info->stock.size_max, current->data);
 		info->curs_y++;
 		info->num_elem++;
-		CURSE_MOVE(info->curs_x, info->curs_y);
 		current = current->next;
 	}
 	if (info->curs_y > info->stock.y_max)
@@ -66,7 +65,7 @@ static int	get_values(t_select *info)
 	nb_elem_max = (info->stock.nb_ch / (info->stock.size_max + 1))
 												* (info->stock.nb_line);
 	if (nb_elem_max < info->nb_elem ||
-							info->stock.nb_ch < info->stock.size_max + 34)
+								info->stock.nb_ch < info->stock.size_max + 34)
 	{
 		del_screen(info);
 		CURSE_MOVE(0, 0);

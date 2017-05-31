@@ -46,15 +46,6 @@ void			set_win(int sig)
 	}
 }
 
-static void		stop_win(int sig)
-{
-	t_select	*info;
-
-	info = get_info(NULL);
-	(void)sig;
-	exit(default_terminal(info, 0));
-}
-
 static void		susp_win(int sig)
 {
 	t_select	*info;
@@ -62,12 +53,14 @@ static void		susp_win(int sig)
 
 	(void)sig;
 	info = get_info(NULL);
-	susp[0] = info->term.c_cc[VSUSP];
-	susp[1] = 0;
-	ioctl(0, TIOCSTI, susp);
-	signal(SIGTSTP, SIG_DFL);
 	if (isatty(1))
+	{
+		susp[0] = info->term.c_cc[VSUSP];
+		susp[1] = 0;
+		ioctl(0, TIOCSTI, susp);
+		signal(SIGTSTP, SIG_DFL);
 		default_terminal(info, 0);
+	}
 }
 
 static void		end_susp(int sig)
@@ -85,6 +78,14 @@ static void		end_susp(int sig)
 
 void			init_signal(void)
 {
+	int		i;
+
+	i = 1;
+	while (i <= 31)
+	{
+		signal(i, ign_sig);
+		i++;
+	}
 	signal(SIGWINCH, set_win);
 	signal(SIGTSTP, susp_win);
 	signal(SIGINT, stop_win);

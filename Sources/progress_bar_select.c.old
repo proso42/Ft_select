@@ -6,7 +6,7 @@
 /*   By: proso <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/07 13:41:27 by proso             #+#    #+#             */
-/*   Updated: 2017/04/08 11:52:04 by proso            ###   ########.fr       */
+/*   Updated: 2017/05/27 14:50:57 by proso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <sys/dir.h>
 #include <termios.h>
 #include <term.h>
-#include "Includes/libft.h"
+#include "../Includes/libft.h"
 #define CURSE_MOVE(x, y) tputs(tgoto(tgetstr("cm", NULL), x, y), 0, ft_out)
 
 void	open_sources(char *path, int *total, int *nb)
@@ -78,8 +78,7 @@ int		main(int argc, char **argv)
 
 	nb = 0;
 	total = 0;
-	open_sources(".", &total, &nb);
-	open_sources("Libprintf/", &total, &nb);
+	open_sources("Sources/", &total, &nb);
 	total -= nb;
 	init_term(&term, &d_term);
 	tputs(tgetstr("cl", NULL), 0, ft_out);
